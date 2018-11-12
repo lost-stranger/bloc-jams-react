@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
+import PlayerBar from './PlayerBar';
 
 class Album extends Component {
   constructor(props) {
@@ -45,16 +46,16 @@ class Album extends Component {
     }
   }
 
-mouseEnter(index) {
-  this.setState({ isHovering : index });
-}
+  mouseEnter(index) {
+    this.setState({ isHovering : index });
+  }
 
-mouseLeave() {
-  this.setState({ isHovering : null });
-}
+  mouseLeave() {
+    this.setState({ isHovering : null });
+  }
 
-handleHover(song, index) {
-  const isSameSong = this.state.currentSong === song;
+  handleHover(song, index) {
+    const isSameSong = this.state.currentSong === song;
 
     if (isSameSong && this.state.isPlaying && this.state.isHovering === index) {
       return (<span className = "ion-md-pause" > </span>); //this is working
@@ -68,6 +69,22 @@ handleHover(song, index) {
     else {
       return (<span> {index+1} </span>);
     }
+  }
+
+  handlePrevClick() {
+    const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
+    const newIndex = Math.max(0, currentIndex - 1);
+    const newSong = this.state.album.songs[newIndex];
+    this.setSong(newSong);
+    this.play();
+  }
+
+  handleNextClick() {
+    const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
+    const newIndex = Math.min(currentIndex + 1, 4);
+    const newSong = this.state.album.songs[newIndex];
+    this.setSong(newSong);
+    this.play();
   }
 
   render() {
@@ -95,13 +112,23 @@ handleHover(song, index) {
       <th> Duration </th>
       </tr>
       {this.state.album.songs.map( ( song, index) =>
-        <tr key = {index} onClick={() => this.handleSongClick(song)} onMouseEnter = {() => this.mouseEnter(index)} onMouseLeave = {() => this.mouseLeave()}>
+        <tr key = {index}
+        onClick={() => this.handleSongClick(song)}
+        onMouseEnter = {() => this.mouseEnter(index)}
+        onMouseLeave = {() => this.mouseLeave()}>
         <td id = "song-number"> {this.handleHover(song, index)} </td>
         <td id = "song-title"> {song.title}</td>
         <td id = "song-duration>"> {song.duration} </td>
         </tr>)}
         </tbody>
         </table>
+        <PlayerBar
+        isPlaying={this.state.isPlaying}
+        currentSong={this.state.currentSong}
+        handleSongClick={() => this.handleSongClick(this.state.currentSong)}
+        handlePrevClick={() => this.handlePrevClick()}
+        handleNextClick={() => this.handleNextClick()}
+        />
         </section>
       );
     }
