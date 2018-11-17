@@ -13,7 +13,7 @@ class Album extends Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
-      currentTime: 0,
+      cTime: 0,
       duration: album.songs[0].duration,
       isPlaying: false,
       isHovering: null,
@@ -108,9 +108,9 @@ class Album extends Component {
 
   handleNextClick() {
   const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
-  const newIndex = Math.min(this.state.album.songs.length, currentIndex + 1);
-  const newSong = this.state.album.songs[newIndex];
-  this.setSong(newSong);
+  const newIndex1 = Math.min(4, currentIndex + 1);
+  const newSong1 = this.state.album.songs[newIndex1];
+  this.setSong(newSong1);
   this.play();
   }
 
@@ -125,6 +125,14 @@ class Album extends Component {
   this.audioElement.volume = newVolume;
   this.setState({ volume: newVolume });
   }
+
+  formatTime(time) {
+      var time1 = Math.round(time);
+      var time2 = Math.floor(time1/60);
+      var time3 = time1%60;
+      var time4 = time3<10 ? (`${time2}`+`:0`+`${time3}`) : (`${time2}`+`:`+`${time3}`);
+      return time4;
+    }
 
   render() {
     return (
@@ -157,7 +165,7 @@ class Album extends Component {
         onMouseLeave = {() => this.mouseLeave()}>
         <td id = "song-number"> {this.handleHover(song, index)} </td>
         <td id = "song-title"> {song.title}</td>
-        <td id = "song-duration>"> {song.duration} </td>
+        <td id = "song-duration>"> {this.formatTime(song.duration)} </td>
         </tr>)}
         </tbody>
         </table>
@@ -166,6 +174,8 @@ class Album extends Component {
         currentSong={this.state.currentSong}
         currentTime={this.audioElement.currentTime}
         duration={this.audioElement.duration}
+        currentTimeFormattted={this.formatTime(this.audioElement.currentTime)}
+        durationFormatted={this.formatTime(this.audioElement.duration)}
         volume = {this.audioElement.volume}
         handleSongClick={() => this.handleSongClick(this.state.currentSong)}
         handlePrevClick={() => this.handlePrevClick()}
