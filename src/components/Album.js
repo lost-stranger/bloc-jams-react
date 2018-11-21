@@ -152,7 +152,7 @@ class Album extends Component {
       </section>
 
       <table id="song-list" align = "center">
-      <colgroup>
+      <colgroup className = "column1">
       <col id="song-number-column" />
       <col id="song-title-column" />
       <col id="song-duration-column" />
