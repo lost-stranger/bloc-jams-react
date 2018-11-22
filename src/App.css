@@ -62,7 +62,7 @@ width: 100%;
   text-align: left;
   height: 100%;
   width: 100%;
-  padding: 100px 150px 100px 200px;
+  padding: 100px 150px 150px 200px;
   }
 
 .point{
@@ -94,9 +94,10 @@ width: 100%;
 
 .albumImage {
   position: relative;
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   z-index: 1;
+  box-shadow: 0 0 10px #000
 }
 
 .albumDetails {
@@ -118,25 +119,43 @@ width: 100%;
 #album-cover-art {
   display: inline-grid;
   float: left;
-  width: 30%;
-  height: 30%;
-  padding: 10px 10px 10px 300px;
+  width: 26%;
+  height: 26%;
+  padding: 10px 10px 10px 10px;
 }
 
 #song-list {
-  display: inline-grid;
+  display: table-cell;
+  vertical-align: middle;
   position: relative;
-  padding: 10px 10px 10px 685px;
+  padding-left: 5%;
+  padding-top: 5%;
+  width: 70%;
+  text-align: center;
+  font-size: 20px;
 }
 
-
-#album-info {
-  margin-bottom: 1em;
-  display: flex;
-  color: black;
+#album-title{
   font-family: arial rounded mt bold;
-  padding: 10px 10px 10px 300px;
-  }
+  font-size: 40px;
+  display: block;
+  padding-top: 14%;
+  padding-left: 7%;
+
+}
+
+.artist{
+  font-family: arial rounded mt bold;
+  font-size: 20px;
+  padding-left: 10%;
+}
+
+#release-info {
+  font-family: arial rounded mt bold;
+  font-size: 12px;
+    padding-left: 10%;
+}
+
 
 td {
   border-bottom: 1px solid #333;
@@ -151,26 +170,24 @@ td {
 .player-bar {
   text-align: center;
   position: relative;
-  top: 10px;
   background-color: #696969;
+  padding-top: .5%;
   }
 
-#buttons {
-  margin: 1.5em;
-}
-
 #buttons button span {
-  padding: 20px;
-  color: #8B008B;
+  padding: 80px;
+  padding: 20px 20px 20px 20px;
+  color: #696969;
 }
 
 #time-control input {
-  width: 50%;
+  width: 70%;
   display: inline;
-  margin: 0 .75em;
+  color: white;
 }
 
 #volume-control input {
   width: 10%;
-  display: inline;
+  display: inline-flex;
+  color: white;
 }
