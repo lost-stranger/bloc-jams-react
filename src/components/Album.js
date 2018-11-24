@@ -131,11 +131,9 @@ class Album extends Component {
     if (typeof(time) !== 'number'){
       return `-:--`;
     } else {
-      var time1 = Math.round(time);
-      var time2 = Math.floor(time1/60);
-      var time3 = time1%60;
-      var time4 = time3<10 ? (`${time2}`+`:0`+`${time3}`) : (`${time2}`+`:`+`${time3}`);
-      return time4;
+      var m = Math.floor(time / 60);
+      var s= Number(time % 60 / 100).toFixed(2);
+      return(`${m}`+`:`+`${s.substr(2,2)}`);
     }
   }
 
